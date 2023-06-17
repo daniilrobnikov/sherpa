@@ -49,12 +49,13 @@ function initWebSocket() {
 
   // Listen for messages
   socket.addEventListener('message', function(event) {
-    console.log('Received message: ', event.data);
+    let message = JSON.parse(event.data);
+    document.getElementById('results').value = message.text;
+    console.log('Received message: ', message);
 
-    document.getElementById('results').value = event.data;
-    socket.send('Done');
-    console.log('Sent Done');
-    socket.close();
+    // socket.send('Done');
+    // console.log('Sent Done');
+    // socket.close();
   });
 }
 
@@ -96,7 +97,7 @@ function onFileChange() {
   console.log('file.size ' + file.size);
 
   let reader = new FileReader();
-  reader.onload = function() {
+  reader.onload = async function() {
     console.log('reading file!');
     let view = new Int16Array(reader.result);
     // we assume the input file is a wav file.

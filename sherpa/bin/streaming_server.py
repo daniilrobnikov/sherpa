@@ -606,7 +606,7 @@ class StreamingServer(object):
             ssl=ssl_context,
         ):
             ip_list = ["0.0.0.0", "localhost", "127.0.0.1"]
-            ip_list.append(socket.gethostbyname(str(socket.gethostname())))
+            # ip_list.append(socket.gethostbyname(str(socket.gethostname())))
             proto = "http://" if ssl_context is None else "https://"
             s = "Please visit one of the following addresses:\n\n"
             for p in ip_list:
@@ -706,6 +706,7 @@ class StreamingServer(object):
             "timestamps": format_timestamps(result.timestamps),
             "final": True,  # end of connection, always set final to True
         }
+        print(message)
 
         await socket.send(json.dumps(message))
 
