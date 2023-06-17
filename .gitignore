@@ -18,3 +18,4 @@ Testing
 run-offline-ctc*.sh
 run-offline-asr*.sh
 sherpa-nemo-ctc*
+test.ipynb

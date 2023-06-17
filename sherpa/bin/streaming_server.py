@@ -36,9 +36,9 @@ git lfs pull --include "data/lang_bpe_500/LG.pt"
 cd /path/to/sherpa
 
 python3 ./sherpa/bin/streaming_server.py \
-  --port=6006
+  --port=6006 \
   --nn-model=./icefall-asr-librispeech-pruned-transducer-stateless7-streaming-2022-12-29/exp/cpu_jit.pt \
-  --tokens=./icefall-asr-librispeech-pruned-transducer-stateless7-streaming-2022-12-29/data/lang_bpe_500/tokens.txt \
+  --tokens=./icefall-asr-librispeech-pruned-transducer-stateless7-streaming-2022-12-29/data/lang_bpe_500/tokens.txt
 
 (3) modified_beam_search
 
@@ -606,7 +606,7 @@ class StreamingServer(object):
             ssl=ssl_context,
         ):
             ip_list = ["0.0.0.0", "localhost", "127.0.0.1"]
-            ip_list.append(socket.gethostbyname(socket.gethostname()))
+            ip_list.append(socket.gethostbyname(str(socket.gethostname())))
             proto = "http://" if ssl_context is None else "https://"
             s = "Please visit one of the following addresses:\n\n"
             for p in ip_list:
